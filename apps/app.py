@@ -1,4 +1,5 @@
 from flask import Flask
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -8,6 +9,7 @@ def index():
     return "<h1>Index</h1><p>This is the index.</p>"
 
 
-@app.route("/details/<int:product_id>")
-def details(product_id):
-    return f'<h1>Product ##{product_id}</h1><p>This is the page for product {product_id}.</p>'
+@app.route("/handle_ttl/<int:ttl>")
+def details(ttl):
+    now = datetime.now().isoformat()
+    return f'Setting this TTL to {ttl}. Date: {now}\n', {'Cache-control': f'public, max-age={ttl}'}
