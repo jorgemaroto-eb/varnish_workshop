@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, make_response, render_template
 from datetime import datetime
 
 app = Flask(__name__)
@@ -35,3 +35,30 @@ def footer():
     return f'THIS IS THE FOOTER ({now})', {
         "Cache-control": "public, max-age=10"
     }
+
+@app.route("/simple")
+def simple():
+    now = datetime.now().isoformat()
+
+    response = make_response(render_template('simple.html', now=now))
+    response.headers['Cache-control'] = 'no-cache'
+    return response
+
+## ADD an iframe example
+
+@app.route("/esi/load_content")
+def using_esi():
+    now = datetime.now().isoformat()
+
+    response = make_response(render_template('content_via_esi.html', now=now))
+    response.headers['Cache-control'] = 'no-cache'
+    return response
+
+
+@app.route("/esi/content_lorem")
+def lorem():
+    now = datetime.now().isoformat()
+
+    response = make_response(render_template('content_lorem.html', now=now))
+    response.headers['Cache-control'] = "public, max-age=10"
+    return response

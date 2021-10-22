@@ -1,0 +1,40 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+body::after {
+  content: "";
+  display: block;
+  height: 150px; /* Set same as footer's height */
+}
+
+strong {
+    color: #506C64;
+    text-decoration: underline;
+}
+
+#header {
+  background-color: #77CBB9;
+  height: 150px;
+  color: white;
+  padding: 15px;
+}
+
+#content {
+  position: absolute;
+  padding: 15px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background-color: #75B8C8;
+  color: white;
+  padding: 15px;
+}

@@ -27,9 +27,24 @@ sub vcl_backend_error {
 }
 
 sub vcl_backend_response {
+    # Don't cache 50x responses
+    if (beresp.status == 500 || beresp.status == 502 || beresp.status == 503 || beresp.status == 504) {
+        return (abandon);
+    }
+
+    # if (beresp.http.cache-control ~ "(no-cache|private)") {
+    #     set beresp.ttl = 0s;
+    #     set beresp.grace = 0s;
+    #     # return (miss);
+    # }
+
     if(bereq.url ~ "^/esi/.*$") {
         set beresp.do_esi = true;
     }
+
+    std.log("TTL: " + beresp.ttl);
+    std.log("Grace: " + beresp.grace);
+    # return (deliver);
     # set beresp.ttl = 5s;
-    return (deliver);
+    # return (deliver);
 }
