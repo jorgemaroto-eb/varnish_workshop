@@ -27,6 +27,9 @@ sub vcl_backend_error {
 }
 
 sub vcl_backend_response {
+    if(bereq.url ~ "^/esi/.*$") {
+        set beresp.do_esi = true;
+    }
     # set beresp.ttl = 5s;
     return (deliver);
 }
