@@ -30,6 +30,8 @@ services:
     build:
       context: ./varnish/
       dockerfile: Dockerfile
+    # http://varnish-cache.org/docs/6.0/reference/varnishd.html#feature
+    command: "-p feature=+esi_disable_xml_check -p default_ttl=10"
     ports:
       - "8080:80"
     volumes:

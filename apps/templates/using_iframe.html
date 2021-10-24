@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+
+{% block header %}Now it's <strong>{{ now }}</strong>{% endblock %}
+
+{% block content %}
+<iframe src="/page/content/6" />
+{% endblock %}
+
+{% block footer %}
+Copyright generated at <strong>{{ now }}</strong>
+{% endblock %}

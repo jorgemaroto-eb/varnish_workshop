@@ -1,7 +1,5 @@
 vcl 4.0;
 
-# varnishlog -g raw -i VCL_Log
-
 import std;
 # import var;
 # var module needs to be compiled manually, so I'm skipping from this first example
@@ -27,6 +25,12 @@ sub vcl_backend_error {
 }
 
 sub vcl_backend_response {
-    # set beresp.ttl = 5s;
-    return (deliver);
+    # Don't cache 50x responses
+    if (beresp.status == 500 || beresp.status == 502 || beresp.status == 503 || beresp.status == 504) {
+        return (abandon);
+    }
+
+    if(bereq.url ~ "^/esi/.*$") {
+        set beresp.do_esi = true;
+    }
 }
