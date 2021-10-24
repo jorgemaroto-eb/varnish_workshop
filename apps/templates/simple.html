@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
 
-{% block header %}Now it's <strong>{{ now }}</strong>{% endblock %}
+{% block header %}Now it's <strong>{{ now }}</strong> (TTL: {{ ttl }}){% endblock %}
 
 {% block content %}
 <h3>Generated at <strong>{{ now }}</strong></h3>

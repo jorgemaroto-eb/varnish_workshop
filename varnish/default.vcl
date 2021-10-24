@@ -1,7 +1,5 @@
 vcl 4.0;
 
-# varnishlog -g raw -i VCL_Log
-
 import std;
 # import var;
 # var module needs to be compiled manually, so I'm skipping from this first example
@@ -32,19 +30,7 @@ sub vcl_backend_response {
         return (abandon);
     }
 
-    # if (beresp.http.cache-control ~ "(no-cache|private)") {
-    #     set beresp.ttl = 0s;
-    #     set beresp.grace = 0s;
-    #     # return (miss);
-    # }
-
     if(bereq.url ~ "^/esi/.*$") {
         set beresp.do_esi = true;
     }
-
-    std.log("TTL: " + beresp.ttl);
-    std.log("Grace: " + beresp.grace);
-    # return (deliver);
-    # set beresp.ttl = 5s;
-    # return (deliver);
 }

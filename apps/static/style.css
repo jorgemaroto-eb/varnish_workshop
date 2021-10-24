@@ -17,11 +17,18 @@ strong {
     text-decoration: underline;
 }
 
+iframe {
+    width: 600px;
+    height: 300px;
+}
+
 #header {
   background-color: #77CBB9;
   height: 150px;
   color: white;
   padding: 15px;
+  font-size: 40px;
+  text-align: center;
 }
 
 #content {
@@ -37,4 +44,5 @@ strong {
   background-color: #75B8C8;
   color: white;
   padding: 15px;
+  text-align: center;
 }
