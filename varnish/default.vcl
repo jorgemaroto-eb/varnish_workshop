@@ -72,6 +72,10 @@ sub vcl_recv {
 }
 
 sub vcl_backend_response {
+    # ban lurker (using the console)
+    set beresp.http.x-host = bereq.http.host;
+    set beresp.http.x-url = bereq.url;
+
     # Don't cache 50x responses
     if (beresp.status == 500 || beresp.status == 502 || beresp.status == 503 || beresp.status == 504) {
         return (abandon);
