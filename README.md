@@ -27,3 +27,8 @@ docker-compose exec varnish varnishlog -g raw -i VCL_Log
 docker-compose exec varnish reload-vcl.sh
 docker-compose exec varnish varnishlog -g raw -i VCL_Log
 ```
+
+4. Adding endpoint to configure the TTL using headers:
+```
+curl http://localhost:8080/ttl/2
+```
