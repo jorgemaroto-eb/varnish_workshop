@@ -21,5 +21,6 @@ services:
     # http://varnish-cache.org/docs/6.0/reference/varnishd.html#feature
     ports:
       - "8080:80"
+    command: "-p default_ttl=10"
     volumes:
       - ./varnish/default.vcl:/etc/varnish/default.vcl

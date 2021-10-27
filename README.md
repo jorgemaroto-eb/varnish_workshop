@@ -17,7 +17,13 @@ varnishtop -i ReqUrl -q "VCL_call eq 'MISS'"
 ```
 
 
-#### Logs
+2. Adding logs
 ```
+docker-compose exec varnish varnishlog -g raw -i VCL_Log
+```
+
+3. Set default TTL to 10:
+```
+docker-compose exec varnish reload-vcl.sh
 docker-compose exec varnish varnishlog -g raw -i VCL_Log
 ```
