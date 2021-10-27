@@ -15,3 +15,9 @@ varnishlog -i ReqUrl -i VCL_call -i VCL_return -q "VCL_call eq 'MISS'"
 
 varnishtop -i ReqUrl -q "VCL_call eq 'MISS'"
 ```
+
+
+#### Logs
+```
+docker-compose exec varnish varnishlog -g raw -i VCL_Log
+```
