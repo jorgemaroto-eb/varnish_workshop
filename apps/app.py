@@ -27,3 +27,24 @@ def simple(ttl):
     response = make_response(render_template("simple.html", now=now, ttl=ttl))
     response.headers["Cache-control"] = "no-cache"
     return response
+
+
+# SPLITTING THE PAGE
+
+@app.route("/page/content/<int:ttl>")
+def only_content(ttl):
+    now = datetime.now().isoformat()
+
+    response = make_response(render_template("_content.html", now=now, ttl=ttl))
+    response.headers["Cache-control"] = f"public, max-age={ttl}"
+
+    return response
+
+@app.route("/iframe/<int:ttl>")
+def using_iframe(ttl):
+    now = datetime.now().isoformat()
+
+    response = make_response(render_template("using_iframe.html", now=now, ttl=ttl))
+    response.headers["Cache-control"] = f"public, max-age={ttl}"
+
+    return response

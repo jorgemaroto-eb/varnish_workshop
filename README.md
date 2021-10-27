@@ -36,3 +36,10 @@ curl http://localhost:8080/ttl/2
 5. Adding some templates to test response from the browser:
 - http://localhost:8080/simple/1
 - http://localhost:8080/simple/10
+
+```
+docker-compose exec varnish varnishlog -g raw -i VCL_Log
+```
+
+6. Adding iframe to load different parts
+- http://localhost:8080/iframe/1
