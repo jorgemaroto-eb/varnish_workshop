@@ -1,6 +1,9 @@
 vcl 4.0;
 
 import std;
+import directors;
+# import var;
+# var module needs to be compiled manually, so I'm skipping from this first example
 
 probe flask_probe {
     # timeout: the amount of time the probe waits for a backend response.
@@ -12,7 +15,7 @@ probe flask_probe {
     .url = "/";
     .expected_response = 200;
     .timeout = 1s;
-    .interval = 10s;
+    .interval = 5s;
     .window = 5;
     .threshold = 3;
     # .initial = 1; # by default, initial = -1
@@ -36,6 +39,14 @@ backend app2 {
     .probe = flask_probe;
 }
 
+
+# STATE MACHINE
+sub vcl_init {
+    new loadbalancing = directors.round_robin();
+    loadbalancing.add_backend(app1);
+    loadbalancing.add_backend(app2);
+}
+
 sub vcl_hit {
     std.log("state:hit url:" + req.url + " ttl:" + obj.ttl);
 }
@@ -52,6 +63,9 @@ sub vcl_backend_error {
     std.log("state:backend_error url:" + bereq.url + " retries:" + bereq.retries);
 }
 
+sub vcl_recv {
+    set req.backend_hint = loadbalancing.backend();
+}
 
 sub vcl_backend_response {
     # Don't cache 50x responses
@@ -61,11 +75,5 @@ sub vcl_backend_response {
 
     if(bereq.url ~ "^/esi/.*$") {
         set beresp.do_esi = true;
-    }
-}
-
-sub vcl_recv {
-    if(req.url ~ "^/esi/.*$") {
-        set req.backend_hint = app2;
     }
 }

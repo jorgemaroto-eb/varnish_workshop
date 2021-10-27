@@ -49,3 +49,15 @@ docker-compose exec varnish varnishlog -g raw -i VCL_Log
 
 7.1 Setup ESI support
 - http://localhost:8080/esi/1 (check the source).
+
+8. Multiple backends
+```
+docker-compose exec varnish varnishadm backend.list
+```
+- http://localhost:8080/esi/4
+
+9. Directors
+```
+docker-compose exec varnish varnishadm backend.list
+```
+- http://localhost:8080/esi/4
