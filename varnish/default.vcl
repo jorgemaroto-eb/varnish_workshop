@@ -15,7 +15,7 @@ probe flask_probe {
     .url = "/";
     .expected_response = 200;
     .timeout = 1s;
-    .interval = 5s;
+    .interval = 1m;
     .window = 5;
     .threshold = 3;
     # .initial = 1; # by default, initial = -1
@@ -64,10 +64,18 @@ sub vcl_backend_error {
 }
 
 sub vcl_recv {
+    # if(req.url ~ "^/esi/.*$") {
+    #     set req.backend_hint = app2;
+    # }
+
     set req.backend_hint = loadbalancing.backend();
 }
 
 sub vcl_backend_response {
+    # ban lurker (using the console)
+    set beresp.http.x-host = bereq.http.host;
+    set beresp.http.x-url = bereq.url;
+
     # Don't cache 50x responses
     if (beresp.status == 500 || beresp.status == 502 || beresp.status == 503 || beresp.status == 504) {
         return (abandon);
