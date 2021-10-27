@@ -43,3 +43,6 @@ docker-compose exec varnish varnishlog -g raw -i VCL_Log
 
 6. Adding iframe to load different parts
 - http://localhost:8080/iframe/1
+
+7. Adding ESI pages
+- http://localhost:8080/esi/1 (check the source).

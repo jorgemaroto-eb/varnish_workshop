@@ -48,3 +48,12 @@ def using_iframe(ttl):
     response.headers["Cache-control"] = f"public, max-age={ttl}"
 
     return response
+
+@app.route("/esi/<int:ttl>")
+def using_esi(ttl):
+    now = datetime.now().isoformat()
+
+    response = make_response(render_template("using_esi.html", now=now, ttl=ttl))
+    response.headers["Cache-control"] = f"public, max-age={ttl}"
+
+    return response
