@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <title>{% block title %}Varnish Workshop{% endblock %}</title>
+    {% endblock %}
+     <link href="{{ url_for('static', filename = 'style.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header">{% block header %}THE HEADER{% endblock %}</div>
+    <div id="content">{% block content %}THE CONTENT{% endblock %}</div>
+    <div id="footer">{% block footer %}THE FOOTER{% endblock %}</div>
+  </body>
+</html>

@@ -32,3 +32,7 @@ docker-compose exec varnish varnishlog -g raw -i VCL_Log
 ```
 curl http://localhost:8080/ttl/2
 ```
+
+5. Adding some templates to test response from the browser:
+- http://localhost:8080/simple/1
+- http://localhost:8080/simple/10
