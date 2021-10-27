@@ -1,63 +1,24 @@
 # varnish_workshop
 
-### Using CURL:
-- `curl -sI http://localhost:8080/`: without adding headers.
+This is the repository used during the `#etp-be-2021`, more info in the slack channel `#etp-be-2021`.
 
-### Some commands
-```bash
-docker-compose up --build
+## Links
+- [Slides](https://docs.google.com/presentation/d/1TM9EDQD8-Rz3_7ykR5iTi4TgHIt2Fe9giW4cV5Vm-AU/edit).
 
-docker-compose exec varnish bash
-# inside of the container:
-varnishstat
-varnishadm backend.list
-varnishlog -i ReqUrl -i VCL_call -i VCL_return -q "VCL_call eq 'MISS'"
+## Steps
+The workshop was prepared to do step by step, so feel free to click on all of the next links by order.
 
-varnishtop -i ReqUrl -q "VCL_call eq 'MISS'"
-```
+- [`1_hello_world`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/1_hello_world)
+- [`2_adding_logs`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/2_adding_logs)
+- [`3_default_ttl`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/3_default_ttl)
+- [`4_ttl_by_header`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/4_ttl_by_header)
+- [`5_simple_template`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/5_simple_template)
+- [`6_iframe`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/6_iframe)
+- [`7_1_esi_support`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/7_1_esi_support)
+- [`7_esi`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/7_esi)
+- [`8_backends`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/8_backends)
+- [`9_directors`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/9_directors)
+- [`10_final`](https://github.com/eb-jorgemaroto/varnish_workshop/tree/10_final)
 
-
-2. Adding logs
-```
-docker-compose exec varnish varnishlog -g raw -i VCL_Log
-```
-
-3. Set default TTL to 10:
-```
-docker-compose exec varnish reload-vcl.sh
-docker-compose exec varnish varnishlog -g raw -i VCL_Log
-```
-
-4. Adding endpoint to configure the TTL using headers:
-```
-curl http://localhost:8080/ttl/2
-```
-
-5. Adding some templates to test response from the browser:
-- http://localhost:8080/simple/1
-- http://localhost:8080/simple/10
-
-```
-docker-compose exec varnish varnishlog -g raw -i VCL_Log
-```
-
-6. Adding iframe to load different parts
-- http://localhost:8080/iframe/1
-
-7. Adding ESI pages
-- http://localhost:8080/esi/1 (check the source).
-
-7.1 Setup ESI support
-- http://localhost:8080/esi/1 (check the source).
-
-8. Multiple backends
-```
-docker-compose exec varnish varnishadm backend.list
-```
-- http://localhost:8080/esi/4
-
-9. Directors
-```
-docker-compose exec varnish varnishadm backend.list
-```
-- http://localhost:8080/esi/4
+## Misc
+- Last update: 27 October 2021, by Jorge Maroto.
