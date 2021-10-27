@@ -2,8 +2,10 @@
 
 This is the repository used during the `#etp-be-2021`, more info in the slack channel `#etp-be-2021`.
 
+[![Slide 1](slide1.png)](https://docs.google.com/presentation/d/1TM9EDQD8-Rz3_7ykR5iTi4TgHIt2Fe9giW4cV5Vm-AU/edit)
 ## Links
 - [Slides](https://docs.google.com/presentation/d/1TM9EDQD8-Rz3_7ykR5iTi4TgHIt2Fe9giW4cV5Vm-AU/edit).
+
 
 ## Steps
 The workshop was prepared to do step by step, so feel free to click on all of the next links by order.
