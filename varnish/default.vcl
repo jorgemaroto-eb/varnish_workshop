@@ -24,3 +24,15 @@ sub vcl_miss {
 sub vcl_backend_error {
     std.log("state:backend_error url:" + bereq.url + " retries:" + bereq.retries);
 }
+
+
+sub vcl_backend_response {
+    # Don't cache 50x responses
+    if (beresp.status == 500 || beresp.status == 502 || beresp.status == 503 || beresp.status == 504) {
+        return (abandon);
+    }
+
+    if(bereq.url ~ "^/esi/.*$") {
+        set beresp.do_esi = true;
+    }
+}

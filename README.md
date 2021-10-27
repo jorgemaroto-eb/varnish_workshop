@@ -46,3 +46,6 @@ docker-compose exec varnish varnishlog -g raw -i VCL_Log
 
 7. Adding ESI pages
 - http://localhost:8080/esi/1 (check the source).
+
+7.1 Setup ESI support
+- http://localhost:8080/esi/1 (check the source).
